@@ -89,55 +89,55 @@ http://127.0.0.1:5000
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](screenshots/1-homepage.png)
+![Homepage](screenshots/homepage.png)
 
 ### Treks Page
-![Treks Page](screenshots/2-treks-page.png)
+![Treks Page](screenshots/treks-page.png)
 
 ### Travel Page
-![Travel Page](screenshots/3-travel-page.png)
+![Travel Page](screenshots/travel-page.png)
 
 ### Trek Detail Page
-![Trek Detail](screenshots/4-trek-detail.png)
+![Trek Detail](screenshots/trek-detail.png)
 
 ### Travel Detail Page
-![Travel Detail](screenshots/5-travel-detail.png)
+![Travel Detail](screenshots/travel-detail.png)
 
 ### Registration Page
-![Registration](screenshots/6-register.png)
+![Registration](screenshots/register.png)
 
 ### Login Page
-![Login](screenshots/7-login.png)
+![Login](screenshots/login.png)
 
 ### Dashboard
-![Dashboard](screenshots/8-dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 ### Trek Booking Form
-![Trek Booking](screenshots/9-booking.png)
+![Trek Booking](screenshots/booking.png)
 
 ### Travel Booking Form
-![Travel Booking](screenshots/10-travel-booking.png)
+![Travel Booking](screenshots/travel-booking.png)
 
 ### About Page
-![About Page](screenshots/11-about.png)
+![About Page](screenshots/about.png)
 
 ### Contact Page
-![Contact Page](screenshots/12-contact.png)
+![Contact Page](screenshots/contact.png)
 
 ### Privacy Policy
-![Privacy Policy](screenshots/13-privacy.png)
+![Privacy Policy](screenshots/privacy.png)
 
 ### Terms & Conditions
-![Terms & Conditions](screenshots/14-terms.png)
+![Terms & Conditions](screenshots/terms.png)
 
 ### Mobile Homepage
-![Mobile Homepage](screenshots/15-mobile-home.png)
+![Mobile Homepage](screenshots/mobile-home.png)
 
 ### Mobile Menu
-![Mobile Menu](screenshots/16-mobile-menu.png)
+![Mobile Menu](screenshots/mobile-menu.png)
 
 ### Mobile Treks
-![Mobile Treks](screenshots/17-mobile-trek.png)
+![Mobile Treks](screenshots/mobile-trek.png)
 
 # Database Schema
 ## Users Table
