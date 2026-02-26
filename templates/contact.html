@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Contact Us</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Send us a Message</h5>
+                    <form method="POST" action="{{ url_for('contact') }}" id="contactForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Our Office</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> Thamel, Kathmandu, Nepal</p>
+                        <p><i class="fas fa-phone me-2"></i> +977-1-1234567</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@nepaltrekking.com</p>
+                        <p><i class="fas fa-clock me-2"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Follow Us</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-primary fs-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-info fs-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-danger fs-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-success fs-3"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Emergency Contact</h5>
+                    <p class="mb-1">24/7 Support: +977-9876543210</p>
+                    <p>Tourist Police: +977-1-1234568</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Terms and Conditions - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Sidebar for quick navigation -->
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Links</h5>
+                    <div class="list-group">
+                        <a href="#agreement" class="list-group-item list-group-item-action">1. Agreement</a>
+                        <a href="#booking" class="list-group-item list-group-item-action">2. Booking Terms</a>
+                        <a href="#payment" class="list-group-item list-group-item-action">3. Payment Policy</a>
+                        <a href="#cancellation" class="list-group-item list-group-item-action">4. Cancellation Policy</a>
+                        <a href="#responsibility" class="list-group-item list-group-item-action">5. Participant Responsibility</a>
+                        <a href="#liability" class="list-group-item list-group-item-action">6. Limitation of Liability</a>
+                        <a href="#conduct" class="list-group-item list-group-item-action">7. Code of Conduct</a>
+                        <a href="#governing" class="list-group-item list-group-item-action">8. Governing Law</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Terms and Conditions</li>
+                </ol>
+            </nav>
+            
+            <h1 class="mb-4">Terms and Conditions</h1>
+            <p class="text-muted">Last Updated: January 2024</p>
+            
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <strong>Important:</strong> Please read these terms carefully before booking any trek or travel package with us.
+            </div>
+            
+            <div class="card mb-4" id="agreement">
+                <div class="card-body">
+                    <h3>1. Agreement to Terms</h3>
+                    <p>By accessing or using the Nepal Trekking Portal website, you agree to be bound by these Terms and Conditions. If you disagree with any part of the terms, you may not access the service.</p>
+                    <p>These terms constitute a legally binding agreement between you and Nepal Trekking Portal regarding your use of our website and services.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="booking">
+                <div class="card-body">
+                    <h3>2. Booking Terms</h3>
+                    <p>When you book a trek or travel package through our website:</p>
+                    <ul>
+                        <li>You must be at least 18 years old to make a booking</li>
+                        <li>You must provide accurate and complete information</li>
+                        <li>Bookings are subject to availability</li>
+                        <li>We reserve the right to refuse any booking</li>
+                        <li>A confirmation email will be sent upon successful booking</li>
+                    </ul>
+                    
+                    <h5 class="mt-3">Health Requirements</h5>
+                    <p>By booking a trek, you confirm that:</p>
+                    <ul>
+                        <li>You are in good physical health suitable for trekking</li>
+                        <li>You have disclosed any medical conditions that may affect your participation</li>
+                        <li>You have appropriate travel insurance covering trekking activities</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="payment">
+                <div class="card-body">
+                    <h3>3. Payment Policy</h3>
+                    <ul>
+                        <li><strong>Deposit:</strong> 20% of total amount to confirm booking</li>
+                        <li><strong>Balance:</strong> Due 30 days before trek start date</li>
+                        <li><strong>Last-minute bookings:</strong> Full payment required immediately</li>
+                        <li><strong>Accepted payment methods:</strong> Credit/debit cards, bank transfer, PayPal</li>
+                    </ul>
+                    <p>All prices are in USD and include applicable taxes unless stated otherwise.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="cancellation">
+                <div class="card-body">
+                    <h3>4. Cancellation Policy</h3>
+                    
+                    <h5>Cancellation by Customer</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Time Before Trek</th>
+                                    <th>Refund Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>60+ days</td>
+                                    <td>90% refund (minus deposit)</td>
+                                </tr>
+                                <tr>
+                                    <td>30-59 days</td>
+                                    <td>50% refund</td>
+                                </tr>
+                                <tr>
+                                    <td>15-29 days</td>
+                                    <td>25% refund</td>
+                                </tr>
+                                <tr>
+                                    <td>Less than 15 days</td>
+                                    <td>No refund</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h5 class="mt-3">Cancellation by Us</h5>
+                    <p>We reserve the right to cancel any trek due to:</p>
+                    <ul>
+                        <li>Insufficient participants</li>
+                        <li>Weather conditions</li>
+                        <li>Political unrest</li>
+                        <li>Natural disasters</li>
+                        <li>Other safety concerns</li>
+                    </ul>
+                    <p>In such cases, you will receive a full refund or option to reschedule.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="responsibility">
+                <div class="card-body">
+                    <h3>5. Participant Responsibility</h3>
+                    <p>As a participant, you agree to:</p>
+                    <ul>
+                        <li>Follow all instructions from guides and staff</li>
+                        <li>Respect local customs and traditions</li>
+                        <li>Protect the environment (leave no trace)</li>
+                        <li>Carry required personal equipment</li>
+                        <li>Have valid travel insurance</li>
+                        <li>Obtain necessary visas and permits</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="liability">
+                <div class="card-body">
+                    <h3>6. Limitation of Liability</h3>
+                    <p>Nepal Trekking Portal shall not be liable for:</p>
+                    <ul>
+                        <li>Personal injury, illness, or death</li>
+                        <li>Loss or damage to personal property</li>
+                        <li>Delays or changes due to weather</li>
+                        <li>Events beyond our control (force majeure)</li>
+                        <li>Actions of third-party service providers</li>
+                    </ul>
+                    <p>Our maximum liability is limited to the amount paid for the trek.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="conduct">
+                <div class="card-body">
+                    <h3>7. Code of Conduct</h3>
+                    <p>We expect all participants to:</p>
+                    <ul>
+                        <li>Treat guides, porters, and staff with respect</li>
+                        <li>Not engage in illegal activities</li>
+                        <li>Not consume drugs or excessive alcohol</li>
+                        <li>Not harass or discriminate against others</li>
+                        <li>Not damage property or environment</li>
+                    </ul>
+                    <p>Violation may result in immediate termination of services without refund.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4" id="governing">
+                <div class="card-body">
+                    <h3>8. Governing Law</h3>
+                    <p>These Terms shall be governed by the laws of Nepal. Any disputes shall be resolved in the courts of Kathmandu, Nepal.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>9. Contact Information</h3>
+                    <p>For questions about these Terms, please contact:</p>
+                    <ul>
+                        <li><strong>Email:</strong> legal@nepaltrekking.com</li>
+                        <li><strong>Phone:</strong> +977-1-1234567</li>
+                        <li><strong>Address:</strong> Thamel, Kathmandu, Nepal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

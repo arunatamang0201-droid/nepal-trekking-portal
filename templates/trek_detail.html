@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trek.name }} - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('treks') }}">Treks</a></li>
+            <li class="breadcrumb-item active">{{ trek.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ trek.name }}</h1>
+            
+            {% if trek.image_url %}
+            <img src="{{ trek.image_url }}" class="img-fluid rounded mb-4" alt="{{ trek.name }}">
+            {% else %}
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" class="img-fluid rounded mb-4" alt="Mountain">
+            {% endif %}
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Facts</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Region:</strong> {{ trek.region }}</li>
+                                <li><strong>Duration:</strong> {{ trek.duration }} days</li>
+                                <li><strong>Difficulty:</strong> {{ trek.difficulty }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Max Altitude:</strong> {{ trek.max_altitude }}m</li>
+                                <li><strong>Price:</strong> ${{ trek.price }}</li>
+                                <li><strong>Group Size:</strong> 2-12 people</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Description</h3>
+            <p>{{ trek.description }}</p>
+            
+            <h3>Itinerary</h3>
+<div class="card mb-4">
+    <div class="card-body">
+        {% if trek.itinerary %}
+            {% set days = trek.itinerary.split('\n') %}
+            {% for day in days %}
+                {% if day.strip() %}
+                    <div class="mb-3">
+                        <strong>{{ day.split(':')[0] }}:</strong>
+                        {{ day.split(':')[1:]|join(':') }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Itinerary coming soon...</p>
+        {% endif %}
+    </div>
+</div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>What's Included</h4>
+                    <ul class="list-group">
+                        {% for item in trek.includes.split(',') %}
+                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>What's Excluded</h4>
+                    <ul class="list-group">
+                        {% for item in trek.excludes.split(',') %}
+                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title">Book This Trek</h5>
+                    <p class="display-6 text-primary">${{ trek.price }}</p>
+                    <p class="text-muted">per person</p>
+                    
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('book_trek', trek_id=trek.id) }}" class="btn btn-primary btn-lg w-100">Book Now</a>
+                    {% else %}
+                    <div class="alert alert-info">
+                        Please <a href="{{ url_for('login') }}">login</a> to book this trek.
+                    </div>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    <h6>Need Help?</h6>
+                    <p><i class="fas fa-phone"></i> Call us: +977-1-1234567</p>
+                    <p><i class="fas fa-envelope"></i> Email: info@nepaltrekking.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

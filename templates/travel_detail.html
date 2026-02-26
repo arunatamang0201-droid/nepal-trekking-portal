@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}{{ package.name }} - Nepal Travel{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('travel') }}">Travel Packages</a></li>
+            <li class="breadcrumb-item active">{{ package.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ package.name }}</h1>
+            
+            <img src="{{ package.image_url or 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' }}" class="img-fluid rounded mb-4" alt="{{ package.name }}" style="width: 100%; max-height: 400px; object-fit: cover;">
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Package Highlights</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Destination:</strong> {{ package.destination }}</li>
+                                <li><strong>Duration:</strong> {{ package.duration }} days</li>
+                                <li><strong>Type:</strong> {{ package.package_type }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Price:</strong> ${{ package.price }} per person</li>
+                                <li><strong>Group Size:</strong> 2-12 people</li>
+                                <li><strong>Best Season:</strong> All year round</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Description</h3>
+            <p>{{ package.description }}</p>
+            
+            <h3>Itinerary</h3>
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if package.itinerary %}
+                        {% for day in package.itinerary.split('\n') %}
+                            {% if day %}
+                                <div class="mb-2">
+                                    <span class="badge bg-primary me-2">{{ loop.index }}</span>
+                                    {{ day }}
+                                </div>
+                                {% if not loop.last %}<hr class="my-2">{% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p>Itinerary coming soon...</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>What's Included</h4>
+                    <ul class="list-group">
+                        {% for item in package.includes.split(',') %}
+                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>What's Excluded</h4>
+                    <ul class="list-group">
+                        {% for item in package.excludes.split(',') %}
+                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title">Book This Package</h5>
+                    <p class="display-6 text-primary">${{ package.price }}</p>
+                    <p class="text-muted">per person</p>
+                    
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('book_travel', package_id=package.id) }}" class="btn btn-primary btn-lg w-100">Book Now</a>
+                    {% else %}
+                    <div class="alert alert-info">
+                        Please <a href="{{ url_for('login') }}">login</a> to book this package.
+                    </div>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    <h6>Why Book With Us?</h6>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle text-success"></i> Best price guarantee</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Local experts</li>
+                        <li><i class="fas fa-check-circle text-success"></i> 24/7 support</li>
+                        <li><i class="fas fa-check-circle text-success"></i> No hidden fees</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

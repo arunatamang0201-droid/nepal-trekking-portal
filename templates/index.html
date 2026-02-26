@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center; background-size: cover;">
+    <div class="container py-5">
+        <h1 class="display-4 fw-bold">Discover the Himalayas</h1>
+        <p class="lead">Experience the adventure of a lifetime in Nepal's majestic mountains</p>
+        <a href="{{ url_for('treks') }}" class="btn btn-primary btn-lg">Explore Treks</a>
+    </div>
+</section>
+
+<!-- Featured Treks Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Featured Trekking Packages</h2>
+    <div class="row">
+        {% for trek in featured_treks[:6] %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if trek.image_url %}
+                <img src="{{ trek.image_url }}" class="card-img-top" alt="{{ trek.name }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Mountain" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ trek.name }}</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> {{ trek.duration }} days |
+                        <i class="fas fa-chart-line"></i> {{ trek.difficulty }} |
+                        <i class="fas fa-flag"></i> {{ trek.region }}
+                    </p>
+                    <p class="card-text">{{ trek.description[:100] }}...</p>
+                    <p class="h5 text-primary">${{ trek.price }}</p>
+                    <a href="{{ url_for('trek_detail', slug=trek.slug) }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-3">
+        <a href="{{ url_for('treks') }}" class="btn btn-primary">View All Treks</a>
+    </div>
+</section>
+
+<!-- Travel Packages Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Popular Travel Packages</h2>
+    <div class="row">
+        <!-- Kathmandu Package -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='images/kathmandu.jpg') }}" class="card-img-top" alt="Kathmandu Valley" style="height: 200px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                <div class="card-body">
+                    <h5 class="card-title">Kathmandu Valley Heritage Tour</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> 4 days |
+                        <i class="fas fa-map-marker-alt"></i> Kathmandu
+                    </p>
+                    <p class="card-text">Explore UNESCO World Heritage sites in the cultural heart of Nepal including Pashupatinath, Boudhanath, and Durbar Square.</p>
+                    <p class="h5 text-primary">$400</p>
+                    <a href="{{ url_for('travel_detail', slug='kathmandu-heritage') }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pokhara Package -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='images/pokhara.jpg') }}" class="card-img-top" alt="Pokhara" style="height: 200px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                <div class="card-body">
+                    <h5 class="card-title">Pokhara Adventure & Relaxation</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> 5 days |
+                        <i class="fas fa-map-marker-alt"></i> Pokhara
+                    </p>
+                    <p class="card-text">Experience the magic of Pokhara, the city of lakes with stunning mountain views. Boating, paragliding, and sunrise at Sarangkot.</p>
+                    <p class="h5 text-primary">$500</p>
+                    <a href="{{ url_for('travel_detail', slug='pokhara-adventure') }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chitwan Package -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='images/chitwan.jpg') }}" class="card-img-top" alt="Chitwan" style="height: 200px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1585938389612-b552e6c5f2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                <div class="card-body">
+                    <h5 class="card-title">Chitwan Jungle Safari</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> 3 days |
+                        <i class="fas fa-map-marker-alt"></i> Chitwan
+                    </p>
+                    <p class="card-text">Discover wildlife in Chitwan National Park. Spot rhinos, crocodiles, and exotic birds. Enjoy jungle walks and canoe rides.</p>
+                    <p class="h5 text-primary">$350</p>
+                    <a href="{{ url_for('travel_detail', slug='chitwan-safari') }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+
+         <!-- Bandipur Package (NEW) -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='images/bandipur.jpg') }}" class="card-img-top" alt="Bandipur" style="height: 200px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                <div class="card-body">
+                    <h5 class="card-title">Bandipur Heritage Village</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> 3 days |
+                        <i class="fas fa-map-marker-alt"></i> Bandipur
+                    </p>
+                    <p class="card-text">Step back in time in the charming hilltop town of Bandipur. Wander through Newari streets, enjoy panoramic mountain views, and experience traditional village life.</p>
+                    <p class="h5 text-primary">$280</p>
+                    <a href="{{ url_for('travel_detail', slug='bandipur-village') }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kathmandu to Pokhara Hiking Trail (NEW) -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='images/kathmandu-pokhara-trail.jpg') }}" class="card-img-top" alt="Hiking Trail" style="height: 200px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                <div class="card-body">
+                    <h5 class="card-title">Kathmandu to Pokhara Hiking Trail</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> 7 days |
+                        <i class="fas fa-map-marker-alt"></i> Multiple Cities
+                    </p>
+                    <p class="card-text">Combine culture and nature on this unique hiking trail. Walk through traditional villages, terraced farms, and forests while experiencing rural Nepali life.</p>
+                    <p class="h5 text-primary">$650</p>
+                    <a href="{{ url_for('travel_detail', slug='kathmandu-pokhara-hiking') }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Nepal Foodie Tour (NEW) -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='images/food-tour.jpg') }}" class="card-img-top" alt="Food Tour" style="height: 200px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                <div class="card-body">
+                    <h5 class="card-title">Nepal Foodie Tour</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-clock"></i> 8 days |
+                        <i class="fas fa-map-marker-alt"></i> Multiple Cities
+                    </p>
+                    <p class="card-text">A culinary journey through Nepal's diverse flavors. Taste authentic dishes, take cooking classes, visit local markets, and learn about Nepal's food culture.</p>
+                    <p class="h5 text-primary">$890</p>
+                    <a href="{{ url_for('travel_detail', slug='nepal-foodie-tour') }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="{{ url_for('travel') }}" class="btn btn-primary">View All Travel Packages</a>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Why Choose Us</h2>
+        <div class="row">
+            <div class="col-md-3 text-center mb-3">
+                <i class="fas fa-medal fa-3x text-primary mb-3"></i>
+                <h5>Expert Guides</h5>
+                <p>Certified and experienced local guides</p>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                <h5>Safety First</h5>
+                <p>Your safety is our top priority</p>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <i class="fas fa-hand-holding-heart fa-3x text-primary mb-3"></i>
+                <h5>Responsible Travel</h5>
+                <p>Sustainable and eco-friendly practices</p>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <i class="fas fa-star fa-3x text-primary mb-3"></i>
+                <h5>Best Price</h5>
+                <p>Competitive prices with no hidden costs</p>
+            </div>
+        </div>
+    </div>
+</section>
+ 
+<!-- Testimonials Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">What Our Trekkers Say</h2>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        ★ ★ ★ ★ ★
+                    </div>
+                    <p class="card-text">"The Everest Base Camp trek was life-changing! Our guide was incredibly knowledgeable and made sure we were safe and comfortable the entire time."</p>
+                    <footer class="blockquote-footer">Sarah from Australia</footer>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        ★ ★ ★ ★ ★
+                    </div>
+                    <p class="card-text">"Annapurna Circuit exceeded all expectations. The teahouses were comfortable, food was great, and the views... absolutely incredible!"</p>
+                    <footer class="blockquote-footer">Mike from Canada</footer>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        ★ ★ ★ ★ ☆
+                    </div>
+                    <p class="card-text">"Langtang Valley was perfect for our first trek. Beautiful forests, friendly locals, and stunning mountain views. Highly recommended!"</p>
+                    <footer class="blockquote-footer">Emma from UK</footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Regions -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Popular Trekking Regions</h2>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card text-white">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img" alt="Everest" style="height: 200px; object-fit: cover;">
+                <div class="card-img-overlay d-flex align-items-end" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
+                    <h5 class="card-title">Everest Region</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img" alt="Annapurna" style="height: 200px; object-fit: cover;">
+                <div class="card-img-overlay d-flex align-items-end" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
+                    <h5 class="card-title">Annapurna Region</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white">
+                <img src="https://images.unsplash.com/photo-1574930220106-c8d35aa7b452?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFuZ3Rhbmd8ZW58MHx8MHx8fDA%3D" class="card-img" alt="Langtang" style="height: 200px; object-fit: cover;">
+                <div class="card-img-overlay d-flex align-items-end" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
+                    <h5 class="card-title">Langtang Region</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

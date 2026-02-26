@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">About Nepal Trekking Portal</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <p class="lead">Welcome to Nepal Trekking Portal, your trusted partner for unforgettable Himalayan adventures.</p>
+            
+            <p>Founded in 2020, we are a team of passionate trekkers and travel experts dedicated to providing authentic trekking experiences in Nepal. Our mission is to help adventurers from around the world discover the beauty of the Himalayas safely and responsibly.</p>
+            
+            <h3 class="mt-4">Our Story</h3>
+            <p>What started as a small group of local guides has grown into a comprehensive trekking platform serving hundreds of happy trekkers each year. We understand the mountains because we live in their shadow, and we share our knowledge and passion with every guest.</p>
+            
+            <h3 class="mt-4">Best Time to Visit Nepal</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header bg-success text-white">
+                <h5>Spring (March-May)</h5>
+            </div>
+            <div class="card-body">
+                <p>🌡️ Temperature: 10°C to 20°C</p>
+                <p>🌸 Rhododendrons in bloom</p>
+                <p>☀️ Clear skies, great views</p>
+                <p>👍 Best for: All treks, photography</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header bg-warning">
+                <h5>Autumn (September-November)</h5>
+            </div>
+            <div class="card-body">
+                <p>🌡️ Temperature: 10°C to 18°C</p>
+                <p>🍂 Crystal clear mountain views</p>
+                <p>🎉 Festival season (Dashain, Tihar)</p>
+                <p>👍 Best for: Everest, Annapurna, all regions</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <h3 class="mt-4">Why Choose Us</h3>
+            <ul>
+                <li><strong>Local Expertise:</strong> Our guides are born and raised in the Himalayas</li>
+                <li><strong>Safety First:</strong> All guides are first-aid certified and experienced</li>
+                <li><strong>Responsible Tourism:</strong> We support local communities and protect the environment</li>
+                <li><strong>Best Value:</strong> Competitive prices without compromising quality</li>
+                <li><strong>Customized Experiences:</strong> Treks tailored to your preferences</li>
+            </ul>
+            
+            <h3 class="mt-4">Our Team</h3>
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <img src="{{ url_for('static', filename='images/team1.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;" alt="Ram Sharma">
+            <div class="card-body">
+                <h5>Ram Sharma</h5>
+                <p class="text-muted">Founder & Lead Guide</p>
+                <p class="small">20+ years of Himalayan experience. Climbed Everest twice.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <img src="{{ url_for('static', filename='images/team2.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;" alt="Lakpa Sherpa">
+            <div class="card-body">
+                <h5>Lakpa Sherpa</h5>
+                <p class="text-muted">Everest Specialist</p>
+                <p class="small">15 Everest summits. Born and raised in Khumbu region.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <img src="{{ url_for('static', filename='images/team3.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;" alt="Maya Gurung">
+            <div class="card-body">
+                <h5>Sarah Johnson</h5>
+                <p class="text-muted">Customer Experience Manager</p>
+                <p class="small">Former trekker who fell in love with Nepal. Speaks 5 languages.</p>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Facts</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 1000+ Happy Trekkers</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 50+ Trekking Routes</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 25+ Expert Guides</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 5 Years of Experience</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 100% Safety Record</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Certifications</h5>
+                    <p><i class="fas fa-certificate text-warning me-2"></i> Nepal Tourism Board</p>
+                    <p><i class="fas fa-certificate text-warning me-2"></i> Trekking Agencies Association</p>
+                    <p><i class="fas fa-certificate text-warning me-2"></i> International Mountain Guide Association</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

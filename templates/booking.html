@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Book {{ trek.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Book Your Trek</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('book_trek', trek_id=trek.id) }}" id="trekBookingForm">
+                        <div class="mb-3">
+                            <label for="trek_date" class="form-label">Preferred Start Date *</label>
+                            <input type="date" class="form-control" id="trek_date" name="trek_date" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="number_of_people" class="form-label">Number of People *</label>
+                            <input type="number" class="form-control" id="trek_people" name="number_of_people" min="1" max="12" value="1" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="special_requests" class="form-label">Special Requests</label>
+                            <textarea class="form-control" id="special_requests" name="special_requests" rows="3" placeholder="Any dietary requirements, medical conditions, or special requests..."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    I agree to the <a href="{{ url_for('terms') }}">terms and conditions</a>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Hidden field for price -->
+                        <input type="hidden" id="trek_price" value="{{ trek.price }}">
+                        
+                        <div class="alert alert-info">
+                            <strong>Total Amount: $<span id="trekTotal">{{ trek.price }}</span></strong>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                        <a href="{{ url_for('trek_detail', slug=trek.slug) }}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Booking Summary</h5>
+                </div>
+                <div class="card-body">
+                    <h6>{{ trek.name }}</h6>
+                    <p><i class="fas fa-clock"></i> {{ trek.duration }} days in {{ trek.region }}</p>
+                    <p><i class="fas fa-chart-line"></i> Difficulty: {{ trek.difficulty }}</p>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between">
+                        <span>Price per person:</span>
+                        <strong>${{ trek.price }}</strong>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-2" id="trekTotalDisplay">
+                        <span>Total (1 person):</span>
+                        <strong>${{ trek.price }}</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Need Help?</h6>
+                    <p class="mb-1"><i class="fas fa-phone"></i> +977-1-1234567</p>
+                    <p><i class="fas fa-envelope"></i> booking@nepaltrekking.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

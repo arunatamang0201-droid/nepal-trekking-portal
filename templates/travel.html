@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Travel Packages - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Nepal Travel Packages</h1>
+    <p class="lead mb-4">Discover the best of Nepal with our curated travel packages</p>
+    
+    <!-- Filter Section -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filter Packages</h5>
+            <form method="GET" action="{{ url_for('travel') }}" class="row g-3">
+                <div class="col-md-4">
+                    <label for="destination" class="form-label">Destination</label>
+                    <select name="destination" id="destination" class="form-select">
+                        <option value="">All Destinations</option>
+                        <option value="Kathmandu" {% if request.args.get('destination') == 'Kathmandu' %}selected{% endif %}>Kathmandu</option>
+                        <option value="Pokhara" {% if request.args.get('destination') == 'Pokhara' %}selected{% endif %}>Pokhara</option>
+                        <option value="Chitwan" {% if request.args.get('destination') == 'Chitwan' %}selected{% endif %}>Chitwan</option>
+                        <option value="Lumbini" {% if request.args.get('destination') == 'Lumbini' %}selected{% endif %}>Lumbini</option>
+                        <option value="Multiple Cities" {% if request.args.get('destination') == 'Multiple Cities' %}selected{% endif %}>Multiple Cities</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="type" class="form-label">Package Type</label>
+                    <select name="type" id="type" class="form-select">
+                        <option value="">All Types</option>
+                        <option value="Cultural" {% if request.args.get('type') == 'Cultural' %}selected{% endif %}>Cultural</option>
+                        <option value="Adventure" {% if request.args.get('type') == 'Adventure' %}selected{% endif %}>Adventure</option>
+                        <option value="Wildlife" {% if request.args.get('type') == 'Wildlife' %}selected{% endif %}>Wildlife</option>
+                        <option value="Pilgrimage" {% if request.args.get('type') == 'Pilgrimage' %}selected{% endif %}>Pilgrimage</option>
+                        <option value="Combination" {% if request.args.get('type') == 'Combination' %}selected{% endif %}>Combination</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="{{ url_for('travel') }}" class="btn btn-secondary ms-2">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Packages Grid -->
+    <div class="row">
+        {% for package in packages %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ package.image_url or 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }}" class="card-img-top" alt="{{ package.name }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ package.name }}</h5>
+                    <p class="card-text">
+                        <span class="badge bg-info">{{ package.destination }}</span>
+                        <span class="badge bg-success">{{ package.package_type }}</span>
+                        <span class="badge bg-warning">{{ package.duration }} days</span>
+                    </p>
+                    <p class="card-text">{{ package.description[:100] }}...</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 text-primary">${{ package.price }}</span>
+                        <a href="{{ url_for('travel_detail', slug=package.slug) }}" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No packages found matching your criteria.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

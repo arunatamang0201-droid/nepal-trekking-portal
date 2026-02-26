@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Welcome, {{ current_user.full_name or current_user.username }}!</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#profile" class="list-group-item list-group-item-action active" data-bs-toggle="list">Profile</a>
+                <a href="#trek-bookings" class="list-group-item list-group-item-action" data-bs-toggle="list">Trek Bookings</a>
+                <a href="#travel-bookings" class="list-group-item list-group-item-action" data-bs-toggle="list">Travel Bookings</a>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="tab-content">
+                <!-- Profile Tab -->
+                <div class="tab-pane fade show active" id="profile">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Profile Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>Username:</th>
+                                    <td>{{ current_user.username }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td>{{ current_user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Full Name:</th>
+                                    <td>{{ current_user.full_name or 'Not provided' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone:</th>
+                                    <td>{{ current_user.phone or 'Not provided' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Member Since:</th>
+                                    <td>{{ current_user.created_at.strftime('%B %d, %Y') }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Trek Bookings Tab -->
+                <div class="tab-pane fade" id="trek-bookings">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">My Trek Bookings</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if trek_bookings %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Trek</th>
+                                                <th>Date</th>
+                                                <th>People</th>
+                                                <th>Total</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for booking in trek_bookings %}
+                                            <tr>
+                                                <td>{{ booking.trek.name }}</td>
+                                                <td>{{ booking.trek_date.strftime('%Y-%m-%d') }}</td>
+                                                <td>{{ booking.number_of_people }}</td>
+                                                <td>${{ booking.total_price }}</td>
+                                                <td>
+                                                    <span class="badge {% if booking.status == 'confirmed' %}bg-success{% elif booking.status == 'cancelled' %}bg-danger{% else %}bg-warning{% endif %}">
+                                                        {{ booking.status }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {% if booking.status == 'pending' %}
+                                                    <a href="{{ url_for('cancel_booking', booking_id=booking.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to cancel this booking?')">Cancel</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p class="text-muted">You have no trek bookings yet.</p>
+                                <a href="{{ url_for('treks') }}" class="btn btn-primary">Browse Treks</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Travel Bookings Tab -->
+                <div class="tab-pane fade" id="travel-bookings">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">My Travel Bookings</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if travel_bookings %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Package</th>
+                                                <th>Travel Date</th>
+                                                <th>People</th>
+                                                <th>Total</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for booking in travel_bookings %}
+                                            <tr>
+                                                <td>{{ booking.package.name }}</td>
+                                                <td>{{ booking.travel_date.strftime('%Y-%m-%d') }}</td>
+                                                <td>{{ booking.number_of_people }}</td>
+                                                <td>${{ booking.total_price }}</td>
+                                                <td>
+                                                    <span class="badge {% if booking.status == 'confirmed' %}bg-success{% elif booking.status == 'cancelled' %}bg-danger{% else %}bg-warning{% endif %}">
+                                                        {{ booking.status }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {% if booking.status == 'pending' %}
+                                                    <a href="{{ url_for('cancel_travel_booking', booking_id=booking.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to cancel this booking?')">Cancel</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p class="text-muted">No travel bookings yet.</p>
+                                <a href="{{ url_for('travel') }}" class="btn btn-primary">Browse Travel Packages</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

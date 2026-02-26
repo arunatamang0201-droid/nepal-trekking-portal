@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Treks - Nepal Trekking Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Trekking Packages</h1>
+    
+    <!-- Filter Section -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filter Treks</h5>
+            <form method="GET" action="{{ url_for('treks') }}" class="row g-3">
+                <div class="col-md-4">
+                    <label for="region" class="form-label">Region</label>
+                    <select name="region" id="region" class="form-select">
+                        <option value="">All Regions</option>
+                        <option value="Everest" {% if request.args.get('region') == 'Everest' %}selected{% endif %}>Everest Region</option>
+                        <option value="Annapurna" {% if request.args.get('region') == 'Annapurna' %}selected{% endif %}>Annapurna Region</option>
+                        <option value="Langtang" {% if request.args.get('region') == 'Langtang' %}selected{% endif %}>Langtang Region</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="difficulty" class="form-label">Difficulty</label>
+                    <select name="difficulty" id="difficulty" class="form-select">
+                        <option value="">All Difficulties</option>
+                        <option value="Easy" {% if request.args.get('difficulty') == 'Easy' %}selected{% endif %}>Easy</option>
+                        <option value="Moderate" {% if request.args.get('difficulty') == 'Moderate' %}selected{% endif %}>Moderate</option>
+                        <option value="Difficult" {% if request.args.get('difficulty') == 'Difficult' %}selected{% endif %}>Difficult</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="{{ url_for('treks') }}" class="btn btn-secondary ms-2">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Difficulty Guide -->
+<div class="alert alert-info mb-4">
+    <h5>📊 Trek Difficulty Guide</h5>
+    <div class="row">
+        <div class="col-md-4">
+            <span class="badge bg-success">Easy</span> - 3-5 hrs walking per day, suitable for beginners
+        </div>
+        <div class="col-md-4">
+            <span class="badge bg-warning">Moderate</span> - 5-7 hrs walking, some uphill sections
+        </div>
+        <div class="col-md-4">
+            <span class="badge bg-danger">Difficult</span> - 6-8 hrs walking, steep climbs, high altitude
+        </div>
+    </div>
+</div>
+
+    <!-- Treks Grid -->
+    <div class="row">
+        {% for trek in treks %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if trek.image_url %}
+                <img src="{{ trek.image_url }}" class="card-img-top" alt="{{ trek.name }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Mountain" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ trek.name }}</h5>
+                    <p class="card-text">
+                        <span class="badge bg-primary">{{ trek.region }}</span>
+                        <span class="badge bg-info">{{ trek.difficulty }}</span>
+                        <span class="badge bg-success">{{ trek.duration }} days</span>
+                    </p>
+                    <p class="card-text">{{ trek.description[:150] }}...</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 text-primary">${{ trek.price }}</span>
+                        <a href="{{ url_for('trek_detail', slug=trek.slug) }}" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No treks found matching your criteria.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
